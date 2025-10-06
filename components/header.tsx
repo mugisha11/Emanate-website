@@ -59,8 +59,9 @@ export function Header() {
                 <img src="/logo.jpg" alt="Emanate Logo" className="w-8 h-8 object-contain" />
               </div>
               <div>
-                <div className="font-bold text-base text-foreground leading-tight">EMANATE</div>
-                <div className="text-[10px] text-muted-foreground leading-tight color:purple;">EVIDENCES MATTER</div>
+                <div className="font-bold text-base leading-tight text-[#0a58ca]">EMANATE</div>
+                <div className="h-0.5 w-8 bg-[#6b21a8] rounded mt-1 mb-1" />
+                <div className="text-[10px] leading-tight text-[#0a58ca]">EVIDENCES MATTER</div>
               </div>
             </Link>
 
