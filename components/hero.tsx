@@ -12,7 +12,7 @@ export function Hero() {
         loop
         playsInline
         aria-hidden="true"
-        poster="/hero-poster.jpg"
+        poster="/hero-poster.svg"
       >
         {/* primary source (mp4 provided) */}
         <source src="/hero.mp4" type="video/mp4" />
