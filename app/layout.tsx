@@ -6,6 +6,9 @@ import { Inter } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import { Suspense } from "react"
+import dynamic from 'next/dynamic'
+
+const AiFab = dynamic(() => import('@/components/ai-fab').then((m) => m.AiFab), { ssr: false })
 
 const inter = Inter({
   subsets: ["latin"],
@@ -86,6 +89,8 @@ export default function RootLayout({
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable} ${inter.variable} antialiased`}>
         <Suspense fallback={null}>{children}</Suspense>
         <Analytics />
+        {/* AI floating button visible on all pages */}
+        <AiFab />
       </body>
     </html>
   )
