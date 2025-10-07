@@ -6,7 +6,7 @@ import { Inter } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import { Suspense } from "react"
-import { AiFab } from '@/components/ai-fab'
+import dynamic from 'next/dynamic'
 
 const inter = Inter({
   subsets: ["latin"],
@@ -86,10 +86,16 @@ export default function RootLayout({
       </head>
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable} ${inter.variable} antialiased`}>
         <Suspense fallback={null}>{children}</Suspense>
+        {/* Client-only floating AI assistant button */}
+        <Suspense fallback={null}>
+          {/** Dynamically import to avoid server-side rendering issues */}
+          <DynamicAIFloating />
+        </Suspense>
         <Analytics />
-        {/* AI floating button visible on all pages */}
-        <AiFab />
       </body>
     </html>
   )
 }
+
+// Dynamically load the client-only floating component
+const DynamicAIFloating = dynamic(() => import('../components/ai-floating').then(m => m.AIFloating), { ssr: false })
