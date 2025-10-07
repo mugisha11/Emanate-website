@@ -1,34 +1,37 @@
 import { NextResponse } from 'next/server'
+import { generateGeminiResponse } from '@/lib/gemini'
+
+// System prompt to guide Gemini's responses
+const SYSTEM_PROMPT = `You are EMANATE's AI assistant. EMANATE is a research and advocacy institute focused on evidence-based decision making.
+Key points about EMANATE:
+- Works with local leaders to design evidence-based interventions
+- Combines research, community engagement and policy advocacy
+- Focus areas: sustainable family & population solutions, climate resilience
+- Values: evidence-led, community-focused, sustainable impact
+
+Keep responses friendly but professional. If unsure, recommend contacting EMANATE directly.`
 
 export async function POST(request: Request) {
   try {
     const body = await request.json()
     const question = body?.question ?? ''
 
-    // If OpenAI key is set, optionally forward the request. For now, return a canned response.
-    if (!process.env.OPENAI_API_KEY) {
-      const canned = `Thanks — I can help with that. Here's a short answer about "${question}". For more details please contact EMANATE.`
-      return NextResponse.json({ answer: canned })
+    // Format messages for Gemini API
+    const messages = [
+      { role: 'user' as const, parts: [{ text: SYSTEM_PROMPT }] },
+      { role: 'user' as const, parts: [{ text: question }] },
+    ]
+
+    const { text, error } = await generateGeminiResponse(messages)
+    
+    if (error) {
+      console.error('Error from Gemini:', error)
+      return NextResponse.json({ answer: 'Sorry, the assistant is temporarily unavailable.' }, { status: 500 })
     }
 
-    // If key exists, call OpenAI (simple fetch, you can replace with SDK)
-    const openaiRes = await fetch('https://api.openai.com/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-      },
-      body: JSON.stringify({
-        model: 'gpt-4o-mini',
-        messages: [{ role: 'system', content: 'You are EMANATE assistant. Answer concisely.' }, { role: 'user', content: question }],
-        max_tokens: 300,
-      }),
-    })
-
-    const data = await openaiRes.json()
-    const answer = data?.choices?.[0]?.message?.content ?? 'Sorry, no answer available.'
-    return NextResponse.json({ answer })
+    return NextResponse.json({ answer: text })
   } catch (err) {
+    console.error('API route error:', err)
     return NextResponse.json({ answer: 'Error processing request.' }, { status: 500 })
   }
 }
