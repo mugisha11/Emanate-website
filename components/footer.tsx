@@ -46,6 +46,28 @@ export function Footer() {
                   Blog
                 </Link>
               </li>
+              <li>
+                <Link href="/careers" className="text-white/80 hover:text-white transition-colors">
+                  Careers
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="text-white/80 hover:text-white transition-colors">
+                  Contact
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Legal Links */}
+          <div>
+            <h4 className="text-lg font-semibold mb-4">Legal</h4>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <Link href="/privacy-policy" className="text-white/80 hover:text-white transition-colors">
+                  Privacy Policy
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -103,13 +125,13 @@ export function Footer() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-white/60">
             <p>© {currentYear} EMANATE. All rights reserved.</p>
             <div className="flex gap-6">
-              <Link href="#" className="hover:text-white transition-colors">
+              <Link href="/privacy-policy" className="hover:text-white transition-colors">
                 PRIVACY POLICY
               </Link>
-              <Link href="#" className="hover:text-white transition-colors">
+              <Link href="/careers" className="hover:text-white transition-colors">
                 CAREERS
               </Link>
-              <Link href="/find-emanate" className="hover:text-white transition-colors">
+              <Link href="/contact" className="hover:text-white transition-colors">
                 CONTACT US
               </Link>
             </div>

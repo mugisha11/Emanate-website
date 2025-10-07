@@ -1,0 +1,180 @@
+"use client"
+
+import { motion } from "framer-motion"
+import { Card, CardContent } from "@/components/ui/card"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Linkedin, Mail, Twitter } from "lucide-react"
+import { Button } from "@/components/ui/button"
+
+const teamMembers = [
+  {
+    name: "Dr. Emmanuel Nshimiyimana",
+    role: "Executive Director",
+    expertise: "Population Research & Policy",
+    initials: "EN",
+    image: "/team/pt.jpg",
+    bio: "Leading expert in population research with over 15 years of experience in policy development.",
+    social: {
+      linkedin: "#",
+      twitter: "#",
+      email: "emmanuel@emanate.org"
+    }
+  },
+  {
+    name: "Dr. Marie Uwimana",
+    role: "Research Director",
+    expertise: "Gender & Family Studies",
+    initials: "MU",
+    image: "/team/mutesi-passport.jpg",
+    bio: "Specializing in gender equality and family dynamics research across East Africa.",
+    social: {
+      linkedin: "#",
+      twitter: "#",
+      email: "marie@emanate.org"
+    }
+  },
+  {
+    name: "Jean Paul Habimana",
+    role: "Advocacy Coordinator",
+    expertise: "Community Engagement",
+    initials: "JH",
+    image: "/team/peace.jpg",
+    bio: "Expert in community mobilization and stakeholder engagement strategies.",
+    social: {
+      linkedin: "#",
+      twitter: "#",
+      email: "jeanpaul@emanate.org"
+    }
+  },
+  {
+    name: "Grace Mukamana",
+    role: "Programme Manager",
+    expertise: "Women's Empowerment",
+    initials: "GM",
+    image: "/team/peter.jpg",
+    bio: "Dedicated to implementing impactful programs for women's empowerment.",
+    social: {
+      linkedin: "#",
+      twitter: "#",
+      email: "grace@emanate.org"
+    }
+  },
+  {
+    name: "David Mugisha",
+    role: "Data Analyst",
+    expertise: "Statistical Analysis",
+    initials: "DM",
+    image: "/team/policy-research-leader.jpg",
+    bio: "Expertise in data analytics and evidence-based decision making.",
+    social: {
+      linkedin: "#",
+      twitter: "#",
+      email: "david@emanate.org"
+    }
+  },
+  {
+    name: "Sarah Ingabire",
+    role: "Communications Officer",
+    expertise: "Knowledge Dissemination",
+    initials: "SI",
+    image: "/team/population.jpg",
+    bio: "Strategic communicator with expertise in research dissemination.",
+    social: {
+      linkedin: "#",
+      twitter: "#",
+      email: "sarah@emanate.org"
+    }
+  }
+]
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2
+    }
+  }
+}
+
+const itemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.5
+    }
+  }
+}
+
+export function TeamSection() {
+  return (
+    <section className="py-24 bg-gradient-to-b from-background via-muted/50 to-background">
+      <div className="container px-4 mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
+            Meet Our Team
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-primary to-primary/80 mx-auto mb-6" />
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            A diverse group of experts dedicated to evidence-based community development
+          </p>
+        </motion.div>
+
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto"
+        >
+          {teamMembers.map((member, index) => (
+            <motion.div
+              key={index}
+              variants={itemVariants}
+              className="group"
+            >
+              <Card className="overflow-hidden border-2 transition-all duration-300 hover:border-primary/50 hover:shadow-xl bg-card/50 backdrop-blur-sm">
+                <CardContent className="p-6">
+                  <div className="relative mb-6 aspect-square overflow-hidden rounded-2xl">
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                      <div className="flex gap-2">
+                        <Button size="icon" variant="ghost" className="rounded-full bg-background/80 hover:bg-background">
+                          <Linkedin className="h-4 w-4" />
+                        </Button>
+                        <Button size="icon" variant="ghost" className="rounded-full bg-background/80 hover:bg-background">
+                          <Twitter className="h-4 w-4" />
+                        </Button>
+                        <Button size="icon" variant="ghost" className="rounded-full bg-background/80 hover:bg-background">
+                          <Mail className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    <h3 className="text-xl font-semibold mb-1 text-foreground">{member.name}</h3>
+                    <p className="text-sm font-medium text-primary mb-2">{member.role}</p>
+                    <p className="text-sm text-muted-foreground mb-4">{member.expertise}</p>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{member.bio}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  )
+}

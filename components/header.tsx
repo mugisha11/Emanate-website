@@ -4,14 +4,9 @@ import { useState } from "react"
 import { Menu, X, ChevronDown, Twitter, Facebook, Instagram, Youtube, Linkedin } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import dynamic from 'next/dynamic'
-
-// Dynamically import AskAssistant so header stays lightweight
-const AskAssistant = dynamic(() => import('@/components/ask-assistant').then((m) => m.AskAssistant), { ssr: false })
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [showAssistant, setShowAssistant] = useState(false)
 
   const navItems = [
     { label: "HOME", href: "/" },
@@ -20,6 +15,8 @@ export function Header() {
     { label: "PROGRAMMES", href: "/programmes" },
     { label: "GET INVOLVED", href: "/get-involved" },
     { label: "BLOG", href: "/blog" },
+    { label: "CAREERS", href: "/careers" },
+    { label: "CONTACT", href: "/contact" },
   ]
 
   return (
@@ -99,15 +96,6 @@ export function Header() {
             >
               {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
-
-            {/* AI Assistant avatar (visible on all sizes) */}
-            <button
-              onClick={() => setShowAssistant((s) => !s)}
-              aria-label="Ask EMANATE"
-              className="ml-3 w-10 h-10 rounded-full overflow-hidden flex items-center justify-center border border-white/10 shadow-sm"
-            >
-              <img src="/placeholder-user.jpg" alt="Ask EMANATE" className="w-full h-full object-cover" />
-            </button>
           </div>
 
           {/* Mobile Navigation */}
@@ -134,15 +122,6 @@ export function Header() {
           )}
         </div>
       </header>
-
-      {/* Assistant panel (floating) */}
-      {showAssistant && (
-        <div className="fixed right-6 bottom-6 z-50 w-96">
-          <div className="bg-white/5 backdrop-blur rounded-xl p-4 shadow-2xl">
-            <AskAssistant />
-          </div>
-        </div>
-      )}
     </>
   )
 }
