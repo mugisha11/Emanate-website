@@ -6,9 +6,7 @@ import { Inter } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import { Suspense } from "react"
-import dynamic from 'next/dynamic'
-
-const AiFab = dynamic(() => import('@/components/ai-fab').then((m) => m.AiFab), { ssr: false })
+import { AiFab } from '@/components/ai-fab'
 
 const inter = Inter({
   subsets: ["latin"],
