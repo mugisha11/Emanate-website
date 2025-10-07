@@ -11,11 +11,26 @@ export function SocialMediaSection() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-4 gap-4">
-          {[1, 2, 3, 4].map((i) => (
-            <div key={i} className="bg-zinc-800 aspect-square flex items-center justify-center">
-              <p className="text-zinc-600 text-sm">Social Media Post {i}</p>
-            </div>
+        {/* Sample image grid using assets from /public */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+          {[
+            { src: '/women-leadership-meeting.jpg', alt: 'Women leadership meeting' },
+            { src: '/community-workshop-training.jpg', alt: 'Community workshop and training' },
+            { src: '/diverse-group-of-young-professionals-collaborating.jpg', alt: 'Young professionals collaborating' },
+            { src: '/research-data-analysis.jpg', alt: 'Research and data analysis' },
+          ].map((img) => (
+            <a
+              key={img.src}
+              href="#"
+              className="block rounded-lg overflow-hidden shadow-lg ring-1 ring-white/6 hover:shadow-2xl transition"
+              aria-label={img.alt}
+            >
+              <img
+                src={img.src}
+                alt={img.alt}
+                className="w-full h-48 md:h-56 lg:h-64 object-cover transform transition-transform duration-300 hover:scale-105"
+              />
+            </a>
           ))}
         </div>
       </div>
